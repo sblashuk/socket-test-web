@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="client.js"></script>
+    <link rel="stylesheet" href="client.css">
+</head>
+<body onload="connect()">
+
+<div class="d-flex flex-wrap">
+    <div class="card bg-light mb-3" style="max-width: 20rem;" th:each="client : ${clients}">
+        <div class="card-header" th:text="${client.name}">Header</div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label th:for="'host-addon-' + ${client.guid}">Host</label>
+                    <input required pattern="^([0-9]{1,3}\.){3}[0-9]{1,3}$" type="text" class="form-control"
+                           th:id="'host-addon-' + ${client.guid}" aria-label="21" th:value="${client.host}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label th:for="'port-addon-' + ${client.guid}">Port</label>
+                    <input required type="number" class="form-control" th:id="'port-addon-' + ${client.guid}"
+                           aria-label="21" th:value="${client.port}">
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Message" aria-label="Message"
+                       th:aria-describedby="'send-' + ${client.guid}" th:id="'message-' + ${client.guid}">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="'send-' + ${client.guid}"
+                            th:attr="onclick= |send('${client.guid}')|">Send
+                    </button>
+                </div>
+            </div>
+
+            <label>History</label>
+            <div class="list-group">
+                <a th:id="'history-' + ${client.guid}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

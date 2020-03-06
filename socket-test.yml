@@ -1,0 +1,10 @@
+clients:
+  scanner-1:
+    name: "scanner-1"
+    host: "127.0.0.1"
+    port: 2112
+    retry: true
+  scanner-2:
+    host: "127.0.0.1"
+    port: 2113
+    retry: true
